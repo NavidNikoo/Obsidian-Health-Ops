@@ -51,7 +51,7 @@ src/
   app/                       # App Router routes
     api/contact/route.ts     # Contact form endpoint (POST)
     services/                # Services landing + specialty deep dive
-    ...                      # about, compliance, pricing, faq, resources, contact, client-login
+    ...                      # about, compliance, pricing, faq, resources, contact, privacy-policy
     sitemap.ts | robots.ts | opengraph-image.tsx
   components/
     navigation/              # Navbar, Footer, Logo

@@ -34,13 +34,19 @@ export function Navbar() {
   return (
     <header
       className={[
-        "sticky top-0 z-50 w-full transition-all duration-300",
+        "sticky top-0 z-50 w-full transition-[background-color,backdrop-filter,border-color,box-shadow,height] duration-[420ms] ease-[cubic-bezier(0.22,1,0.36,1)]",
         scrolled
-          ? "border-b border-white/[0.06] backdrop-blur-xl bg-[rgba(7,9,26,0.72)]"
+          ? "border-b border-white/[0.07] backdrop-blur-xl bg-[rgba(7,9,26,0.78)] shadow-[0_1px_0_0_rgba(255,255,255,0.02)_inset,0_16px_40px_-32px_rgba(0,0,0,0.7)]"
           : "border-b border-transparent bg-transparent",
       ].join(" ")}
     >
-      <div className="mx-auto flex h-16 w-full max-w-7xl items-center justify-between px-6 sm:px-8">
+      <div
+        className={[
+          "mx-auto flex w-full max-w-7xl items-center justify-between px-6 sm:px-8",
+          "transition-[height] duration-[420ms] ease-[cubic-bezier(0.22,1,0.36,1)]",
+          scrolled ? "h-[60px]" : "h-16",
+        ].join(" ")}
+      >
         <div className="flex items-center gap-10">
           <Logo />
           <nav className="hidden items-center gap-1 md:flex">
@@ -53,13 +59,19 @@ export function Navbar() {
                   key={item.href}
                   href={item.href}
                   className={[
-                    "rounded-md px-3 py-2 text-[14px] tracking-tight transition-colors",
+                    "relative rounded-md px-3 py-2 text-[14px] tracking-tight transition-colors duration-200",
                     active
                       ? "text-[var(--color-fg)]"
                       : "text-[var(--color-fg-muted)] hover:text-[var(--color-fg)]",
                   ].join(" ")}
                 >
                   {item.label}
+                  {active ? (
+                    <span
+                      aria-hidden="true"
+                      className="pointer-events-none absolute inset-x-3 -bottom-px h-px bg-gradient-to-r from-transparent via-[var(--color-accent-line)] to-transparent"
+                    />
+                  ) : null}
                 </Link>
               );
             })}
@@ -67,9 +79,6 @@ export function Navbar() {
         </div>
 
         <div className="hidden items-center gap-2 md:flex">
-          <Button href="/client-login" variant="ghost" size="sm">
-            Client login
-          </Button>
           <Button href="/contact" variant="primary" size="sm" trailingIcon>
             Talk to us
           </Button>
@@ -99,9 +108,6 @@ export function Navbar() {
               </Link>
             ))}
             <div className="mt-3 flex flex-col gap-2 border-t border-white/[0.06] pt-4">
-              <Button href="/client-login" variant="secondary" size="md">
-                Client login
-              </Button>
               <Button href="/contact" variant="primary" size="md" trailingIcon>
                 Talk to us
               </Button>

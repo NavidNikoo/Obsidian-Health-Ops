@@ -1,8 +1,10 @@
 "use client";
 
 import { useState } from "react";
+import { AnimatePresence, motion, useReducedMotion } from "framer-motion";
 import { Button } from "@/components/ui/Button";
 import { CheckCircle2, AlertCircle } from "lucide-react";
+import { durations, easings } from "@/lib/motion";
 
 type Status = "idle" | "submitting" | "success" | "error";
 
@@ -18,6 +20,7 @@ export function ContactForm() {
   const [status, setStatus] = useState<Status>("idle");
   const [errors, setErrors] = useState<Record<string, string>>({});
   const [errorMessage, setErrorMessage] = useState<string | null>(null);
+  const prefersReducedMotion = useReducedMotion() ?? false;
 
   async function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
     event.preventDefault();
@@ -48,12 +51,12 @@ export function ContactForm() {
       setErrors(data.errors ?? {});
       setErrorMessage(
         data.error ??
-          "We could not send your message. Please email hello@meridianbilling.co directly."
+          "We could not send your message. Please email meridianbillingco@gmail.com directly."
       );
       setStatus("error");
     } catch {
       setErrorMessage(
-        "Network error. Please email hello@meridianbilling.co directly."
+        "Network error. Please email meridianbillingco@gmail.com directly."
       );
       setStatus("error");
     }
@@ -61,7 +64,15 @@ export function ContactForm() {
 
   if (status === "success") {
     return (
-      <div className="flex flex-col items-start gap-4 rounded-[var(--radius-lg)] border border-[var(--color-accent-line)] bg-[var(--color-accent-soft)] p-8">
+      <motion.div
+        initial={prefersReducedMotion ? { opacity: 0 } : { opacity: 0, y: 8 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{
+          duration: prefersReducedMotion ? 0.01 : durations.reveal,
+          ease: easings.smooth,
+        }}
+        className="flex flex-col items-start gap-4 rounded-[var(--radius-lg)] border border-[var(--color-accent-line)] bg-[var(--color-accent-soft)] p-8"
+      >
         <div className="flex items-center gap-3">
           <CheckCircle2 className="size-6 text-[var(--color-accent)]" />
           <h3 className="text-lg font-semibold text-[var(--color-fg)]">
@@ -72,14 +83,14 @@ export function ContactForm() {
           Thank you. A member of our team will reach out within one business
           day. If your request is urgent, please email{" "}
           <a
-            href="mailto:hello@meridianbilling.co"
+            href="mailto:meridianbillingco@gmail.com"
             className="text-[var(--color-accent)] underline-offset-4 hover:underline"
           >
-            hello@meridianbilling.co
+            meridianbillingco@gmail.com
           </a>
           .
         </p>
-      </div>
+      </motion.div>
     );
   }
 
@@ -147,7 +158,7 @@ export function ContactForm() {
             id="volume"
             name="volume"
             defaultValue=""
-            className="block h-11 w-full appearance-none rounded-[var(--radius-md)] border border-white/[0.07] bg-[var(--color-surface)] px-4 pr-10 text-[15px] text-[var(--color-fg)] outline-none transition-colors hover:border-white/[0.12] focus:border-[var(--color-accent-line)] focus:ring-2 focus:ring-[var(--color-accent-line)]"
+            className="form-field block h-11 w-full appearance-none rounded-[var(--radius-md)] border border-white/[0.07] bg-[var(--color-surface)] px-4 pr-10 text-[15px] text-[var(--color-fg)] outline-none transition-[border-color,box-shadow,background-color] duration-[280ms] ease-[cubic-bezier(0.22,1,0.36,1)] hover:border-white/[0.12] focus:border-[var(--color-accent-line)] focus:shadow-[0_0_0_3px_rgba(79,209,197,0.16),0_0_0_1px_rgba(79,209,197,0.45)] focus:bg-[var(--color-surface-2)]/40"
           >
             <option value="" disabled>
               Select an estimate
@@ -183,20 +194,46 @@ export function ContactForm() {
           name="message"
           required
           rows={6}
-          className="block w-full resize-y rounded-[var(--radius-md)] border border-white/[0.07] bg-[var(--color-surface)] px-4 py-3 text-[15px] text-[var(--color-fg)] outline-none transition-colors placeholder:text-[var(--color-fg-faint)] hover:border-white/[0.12] focus:border-[var(--color-accent-line)] focus:ring-2 focus:ring-[var(--color-accent-line)]"
+          aria-invalid={errors.message ? "true" : "false"}
+          className={[
+            "form-field block w-full resize-y rounded-[var(--radius-md)] border bg-[var(--color-surface)] px-4 py-3 text-[15px] text-[var(--color-fg)] outline-none transition-[border-color,box-shadow,background-color] duration-[280ms] ease-[cubic-bezier(0.22,1,0.36,1)] placeholder:text-[var(--color-fg-faint)]",
+            errors.message
+              ? "border-[var(--color-danger)]/50 focus:border-[var(--color-danger)]/70 focus:shadow-[0_0_0_3px_rgba(248,113,113,0.14)]"
+              : "border-white/[0.07] hover:border-white/[0.12] focus:border-[var(--color-accent-line)] focus:shadow-[0_0_0_3px_rgba(79,209,197,0.16),0_0_0_1px_rgba(79,209,197,0.45)] focus:bg-[var(--color-surface-2)]/40",
+          ].join(" ")}
           placeholder="Specialty, current EHR, what you're hoping to fix or improve..."
         />
-        {errors.message ? (
-          <p className="mt-2 text-sm text-[var(--color-danger)]">{errors.message}</p>
-        ) : null}
+        <AnimatePresence initial={false}>
+          {errors.message ? (
+            <motion.p
+              key="message-error"
+              initial={prefersReducedMotion ? { opacity: 0 } : { opacity: 0, y: -4 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={prefersReducedMotion ? { opacity: 0 } : { opacity: 0, y: -4 }}
+              transition={{ duration: durations.base, ease: easings.smooth }}
+              className="mt-2 text-sm text-[var(--color-danger)]"
+            >
+              {errors.message}
+            </motion.p>
+          ) : null}
+        </AnimatePresence>
       </div>
 
-      {errorMessage ? (
-        <div className="flex items-start gap-3 rounded-[var(--radius-md)] border border-[var(--color-danger)]/30 bg-[var(--color-danger)]/10 p-4 text-sm text-[var(--color-fg)]">
-          <AlertCircle className="mt-0.5 size-4 shrink-0 text-[var(--color-danger)]" />
-          <span>{errorMessage}</span>
-        </div>
-      ) : null}
+      <AnimatePresence initial={false}>
+        {errorMessage ? (
+          <motion.div
+            key="form-error"
+            initial={prefersReducedMotion ? { opacity: 0 } : { opacity: 0, y: -6 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={prefersReducedMotion ? { opacity: 0 } : { opacity: 0, y: -6 }}
+            transition={{ duration: durations.base, ease: easings.smooth }}
+            className="flex items-start gap-3 rounded-[var(--radius-md)] border border-[var(--color-danger)]/30 bg-[var(--color-danger)]/10 p-4 text-sm text-[var(--color-fg)]"
+          >
+            <AlertCircle className="mt-0.5 size-4 shrink-0 text-[var(--color-danger)]" />
+            <span>{errorMessage}</span>
+          </motion.div>
+        ) : null}
+      </AnimatePresence>
 
       <div className="flex flex-wrap items-center justify-between gap-4 pt-2">
         <p className="text-xs text-[var(--color-fg-subtle)]">
@@ -232,6 +269,7 @@ function Field({
   autoComplete,
   error,
 }: FieldProps) {
+  const prefersReducedMotion = useReducedMotion() ?? false;
   return (
     <div>
       <label
@@ -249,11 +287,28 @@ function Field({
         type={type}
         required={required}
         autoComplete={autoComplete}
-        className="block h-11 w-full rounded-[var(--radius-md)] border border-white/[0.07] bg-[var(--color-surface)] px-4 text-[15px] text-[var(--color-fg)] outline-none transition-colors placeholder:text-[var(--color-fg-faint)] hover:border-white/[0.12] focus:border-[var(--color-accent-line)] focus:ring-2 focus:ring-[var(--color-accent-line)]"
+        aria-invalid={error ? "true" : "false"}
+        className={[
+          "form-field block h-11 w-full rounded-[var(--radius-md)] border bg-[var(--color-surface)] px-4 text-[15px] text-[var(--color-fg)] outline-none transition-[border-color,box-shadow,background-color] duration-[280ms] ease-[cubic-bezier(0.22,1,0.36,1)] placeholder:text-[var(--color-fg-faint)]",
+          error
+            ? "border-[var(--color-danger)]/50 focus:border-[var(--color-danger)]/70 focus:shadow-[0_0_0_3px_rgba(248,113,113,0.14)]"
+            : "border-white/[0.07] hover:border-white/[0.12] focus:border-[var(--color-accent-line)] focus:shadow-[0_0_0_3px_rgba(79,209,197,0.16),0_0_0_1px_rgba(79,209,197,0.45)] focus:bg-[var(--color-surface-2)]/40",
+        ].join(" ")}
       />
-      {error ? (
-        <p className="mt-2 text-sm text-[var(--color-danger)]">{error}</p>
-      ) : null}
+      <AnimatePresence initial={false}>
+        {error ? (
+          <motion.p
+            key={`${name}-error`}
+            initial={prefersReducedMotion ? { opacity: 0 } : { opacity: 0, y: -4 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={prefersReducedMotion ? { opacity: 0 } : { opacity: 0, y: -4 }}
+            transition={{ duration: durations.base, ease: easings.smooth }}
+            className="mt-2 text-sm text-[var(--color-danger)]"
+          >
+            {error}
+          </motion.p>
+        ) : null}
+      </AnimatePresence>
     </div>
   );
 }

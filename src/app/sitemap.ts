@@ -10,7 +10,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     "/services",
     "/services/behavioral-health-billing",
     "/pricing",
-    "/compliance",
+    "/privacy-policy",
     "/about",
     "/resources",
     "/faq",

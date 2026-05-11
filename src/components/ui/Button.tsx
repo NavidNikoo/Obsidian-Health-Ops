@@ -6,13 +6,13 @@ type Variant = "primary" | "secondary" | "ghost";
 type Size = "sm" | "md" | "lg";
 
 const base =
-  "inline-flex items-center justify-center gap-2 font-medium tracking-tight transition-all duration-200 will-change-transform select-none disabled:opacity-50 disabled:cursor-not-allowed";
+  "inline-flex items-center justify-center gap-2 font-medium tracking-tight transition-[transform,box-shadow,background-color,color,border-color] duration-[280ms] ease-[cubic-bezier(0.32,0.72,0,1)] will-change-transform select-none disabled:opacity-50 disabled:cursor-not-allowed active:translate-y-0 active:duration-100";
 
 const variants: Record<Variant, string> = {
   primary:
-    "bg-[var(--color-accent)] text-[#06121A] hover:bg-[var(--color-accent-strong)] shadow-[0_1px_0_0_rgba(255,255,255,0.4)_inset,0_8px_24px_-12px_rgba(79,209,197,0.55)] hover:shadow-[0_1px_0_0_rgba(255,255,255,0.5)_inset,0_12px_32px_-12px_rgba(79,209,197,0.65)] hover:-translate-y-px",
+    "bg-[var(--color-accent)] text-[#06121A] hover:bg-[var(--color-accent-strong)] shadow-[0_1px_0_0_rgba(255,255,255,0.4)_inset,0_8px_24px_-12px_rgba(79,209,197,0.55)] hover:shadow-[0_1px_0_0_rgba(255,255,255,0.5)_inset,0_14px_36px_-12px_rgba(79,209,197,0.7)] hover:-translate-y-[2px]",
   secondary:
-    "bg-[var(--color-surface)] text-[var(--color-fg)] ring-line hover:bg-[var(--color-surface-2)] hover:-translate-y-px",
+    "bg-[var(--color-surface)] text-[var(--color-fg)] ring-line hover:bg-[var(--color-surface-2)] hover:-translate-y-[2px] hover:shadow-[0_8px_24px_-16px_rgba(0,0,0,0.6)]",
   ghost:
     "text-[var(--color-fg-muted)] hover:text-[var(--color-fg)] hover:bg-white/5",
 };
@@ -58,7 +58,7 @@ export function Button(props: LinkProps | NativeButtonProps) {
       {trailingIcon ? (
         <ArrowUpRight
           aria-hidden="true"
-          className="size-4 opacity-80 transition-transform duration-200 group-hover:translate-x-0.5 group-hover:-translate-y-0.5"
+          className="size-4 opacity-80 transition-transform duration-[280ms] ease-[cubic-bezier(0.32,0.72,0,1)] group-hover:translate-x-[2px] group-hover:-translate-y-[2px]"
         />
       ) : null}
     </>

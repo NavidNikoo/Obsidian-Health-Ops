@@ -10,32 +10,37 @@ import {
   Building2,
 } from "lucide-react";
 import type { LucideIcon } from "lucide-react";
+import { MotionSection } from "@/components/motion/MotionSection";
+import { MotionStagger } from "@/components/motion/MotionStagger";
+import { MotionItem } from "@/components/motion/MotionItem";
 
 const icons: LucideIcon[] = [Brain, Stethoscope, Sparkles, HeartPulse, Video, Building2];
 
 export function Specialties() {
   return (
     <Section id="specialties">
-      <SectionHeader
-        eyebrow="Specialties we serve"
-        title={
-          <>
-            Built for the{" "}
-            <span className="text-gradient-accent">behavioral health stack.</span>
-          </>
-        }
-        description="Coding, authorization patterns, and payer behavior in behavioral health are unique. We focus exclusively on this work."
-      />
+      <MotionSection>
+        <SectionHeader
+          eyebrow="Specialties we serve"
+          title={
+            <>
+              Built for the{" "}
+              <span className="text-gradient-accent">behavioral health stack.</span>
+            </>
+          }
+          description="Coding, authorization patterns, and payer behavior in behavioral health are unique. We focus exclusively on this work."
+        />
+      </MotionSection>
 
-      <div className="mt-14 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+      <MotionStagger className="mt-14 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
         {specialties.map((s, i) => {
           const Icon = icons[i % icons.length];
           return (
-            <div
+            <MotionItem
               key={s.title}
               className="group relative overflow-hidden rounded-[var(--radius-lg)] border border-white/[0.06] bg-[var(--color-surface)] p-6 transition-all duration-300 hover:-translate-y-0.5 hover:border-white/[0.12]"
             >
-              <div className="flex size-10 items-center justify-center rounded-[var(--radius-md)] border border-white/[0.06] bg-[var(--color-bg-raised)] text-[var(--color-accent)]">
+              <div className="flex size-10 items-center justify-center rounded-[var(--radius-md)] border border-white/[0.06] bg-[var(--color-bg-raised)] text-[var(--color-accent)] transition-colors duration-300 group-hover:border-[var(--color-accent-line)]">
                 <Icon className="size-5" />
               </div>
               <h3 className="mt-5 text-[17px] font-semibold tracking-tight text-[var(--color-fg)]">
@@ -48,10 +53,10 @@ export function Specialties() {
                 aria-hidden="true"
                 className="pointer-events-none absolute inset-x-0 -bottom-px h-px bg-gradient-to-r from-transparent via-[var(--color-accent-line)] to-transparent opacity-0 transition-opacity duration-300 group-hover:opacity-100"
               />
-            </div>
+            </MotionItem>
           );
         })}
-      </div>
+      </MotionStagger>
     </Section>
   );
 }

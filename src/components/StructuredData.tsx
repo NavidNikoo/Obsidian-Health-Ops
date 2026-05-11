@@ -11,7 +11,7 @@ export function StructuredData() {
         url: site.url,
         description: site.description,
         email: site.contactEmail,
-        telephone: site.phone,
+        telephone: site.phoneTel,
         address: {
           "@type": "PostalAddress",
           streetAddress: `${site.address.line1}, ${site.address.line2}`,

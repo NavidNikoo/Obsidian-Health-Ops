@@ -5,6 +5,7 @@ import { Container } from "@/components/ui/Container";
 import { ContactForm } from "@/components/forms/ContactForm";
 import { Mail, Phone, MapPin, Clock } from "lucide-react";
 import { site } from "@/lib/site";
+import { MotionSection } from "@/components/motion/MotionSection";
 
 export const metadata: Metadata = {
   title: "Contact",
@@ -28,7 +29,7 @@ export default function ContactPage() {
 
       <Section className="!py-16 sm:!py-20">
         <div className="grid gap-12 lg:grid-cols-12">
-          <div className="lg:col-span-5">
+          <MotionSection className="lg:col-span-5">
             <div className="rounded-[var(--radius-xl)] border border-white/[0.06] bg-[var(--color-surface)] p-7">
               <h2 className="text-lg font-semibold tracking-tight">
                 Talk to us directly
@@ -54,7 +55,7 @@ export default function ContactPage() {
                   </span>
                 </a>
                 <a
-                  href={`tel:${site.phone.replace(/[^0-9+]/g, "")}`}
+                  href={`tel:${site.phoneTel}`}
                   className="group flex items-start gap-3 text-[var(--color-fg)]"
                 >
                   <span className="mt-0.5 grid size-9 place-items-center rounded-[var(--radius-md)] border border-white/[0.06] bg-[var(--color-bg-raised)] text-[var(--color-accent)]">
@@ -117,13 +118,13 @@ export default function ContactPage() {
                 </li>
               </ol>
             </div>
-          </div>
+          </MotionSection>
 
-          <div className="lg:col-span-7">
+          <MotionSection className="lg:col-span-7" delay={0.05}>
             <div className="rounded-[var(--radius-xl)] border border-white/[0.06] bg-[var(--color-surface)] p-7 sm:p-9">
               <ContactForm />
             </div>
-          </div>
+          </MotionSection>
         </div>
       </Section>
 

@@ -88,27 +88,27 @@ export default function BehavioralHealthBillingPage() {
       <Section className="bg-[var(--color-bg-raised)]/50">
         <div className="grid gap-12 lg:grid-cols-12">
           <div className="lg:col-span-5">
-            <Badge tone="accent">Coding fluency</Badge>
+            <Badge tone="accent">Coding focus</Badge>
             <h2 className="mt-5 text-balance text-3xl font-semibold tracking-tight sm:text-4xl">
-              Codes we work in every day.
+              Codes we are built around.
             </h2>
             <p className="mt-4 text-[16px] leading-relaxed text-[var(--color-fg-muted)]">
-              From routine outpatient psychotherapy to ABA protocol work and
-              IOP per diems, our team operates fluently across the entire
-              behavioral health code set.
+              From outpatient psychotherapy to ABA protocol work and IOP per
+              diems, our workflows are designed around the behavioral health
+              code set rather than retrofitted from a generalist playbook.
             </p>
             <ul className="mt-8 space-y-3 text-sm text-[var(--color-fg-muted)]">
               <li className="flex items-start gap-3">
                 <Check className="mt-0.5 size-4 text-[var(--color-accent)]" />
-                Up to date with annual CPT changes
+                Aligned with current CPT and HCPCS guidance
               </li>
               <li className="flex items-start gap-3">
                 <Check className="mt-0.5 size-4 text-[var(--color-accent)]" />
-                Per payer modifier and POS rules
+                Per-payer modifier and POS rule sets
               </li>
               <li className="flex items-start gap-3">
                 <Check className="mt-0.5 size-4 text-[var(--color-accent)]" />
-                Add-on code logic baked into our scrub
+                Add-on code logic considered as part of the scrub
               </li>
             </ul>
           </div>

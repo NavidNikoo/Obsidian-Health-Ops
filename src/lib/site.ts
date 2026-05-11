@@ -1,20 +1,23 @@
 export const site = {
   name: "Meridian Billing",
   shortName: "Meridian",
-  tagline: "Behavioral health billing, engineered for clarity.",
+  tagline: "Behavioral health billing, designed for clarity.",
   description:
-    "Specialized revenue cycle management for behavioral and mental health practices. Cleaner claims, faster reimbursement, calmer operations.",
+    "A modern, boutique revenue cycle partner focused on behavioral and mental health practices. Built around clean claims, transparent reporting, and calmer operations.",
   url: process.env.NEXT_PUBLIC_SITE_URL ?? "https://example.com",
-  contactEmail: "hello@meridianbilling.co",
-  phone: "(555) 010-0184",
+  contactEmail: "meridianbillingco@gmail.com",
+  /** Shown in UI (footer, contact, etc.) */
+  phone: "(831) 273-2950",
+  /** E.164 for tel: links and structured data */
+  phoneTel: "+18312732950",
   address: {
-    line1: "1180 Mission Street",
-    line2: "Suite 410",
-    city: "San Francisco",
+    line1: "23832 Rockfield Blvd",
+    line2: "STE 120",
+    city: "Lake Forest",
     state: "CA",
-    zip: "94103",
+    zip: "92630",
   },
-  hours: "Mon to Fri, 7am to 6pm PT",
+  hours: "Mon to Fri, 8am to 4pm PT",
   social: {
     linkedin: "https://www.linkedin.com",
   },
@@ -25,7 +28,6 @@ export type NavItem = { label: string; href: string };
 export const primaryNav: NavItem[] = [
   { label: "Services", href: "/services" },
   { label: "Pricing", href: "/pricing" },
-  { label: "Compliance", href: "/compliance" },
   { label: "Resources", href: "/resources" },
   { label: "About", href: "/about" },
   { label: "FAQ", href: "/faq" },
@@ -38,7 +40,6 @@ export const footerNav: { title: string; links: NavItem[] }[] = [
       { label: "Services", href: "/services" },
       { label: "Behavioral Health", href: "/services/behavioral-health-billing" },
       { label: "Pricing", href: "/pricing" },
-      { label: "Compliance", href: "/compliance" },
     ],
   },
   {
@@ -48,14 +49,7 @@ export const footerNav: { title: string; links: NavItem[] }[] = [
       { label: "Resources", href: "/resources" },
       { label: "FAQ", href: "/faq" },
       { label: "Contact", href: "/contact" },
-    ],
-  },
-  {
-    title: "Clients",
-    links: [
-      { label: "Client Login", href: "/client-login" },
-      { label: "Privacy", href: "/compliance#privacy" },
-      { label: "Security", href: "/compliance#security" },
+      { label: "Privacy Policy", href: "/privacy-policy" },
     ],
   },
 ];

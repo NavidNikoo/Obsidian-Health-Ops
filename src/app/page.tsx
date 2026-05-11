@@ -4,7 +4,7 @@ import { IntegrationsStrip } from "@/components/sections/IntegrationsStrip";
 import { FeaturePillars } from "@/components/sections/FeaturePillars";
 import { ProcessSteps } from "@/components/sections/ProcessSteps";
 import { Specialties } from "@/components/sections/Specialties";
-import { Testimonials } from "@/components/sections/Testimonials";
+import { OurApproach } from "@/components/sections/OurApproach";
 import { CTASection } from "@/components/sections/CTASection";
 
 export default function HomePage() {
@@ -16,7 +16,7 @@ export default function HomePage() {
       <FeaturePillars />
       <ProcessSteps />
       <Specialties />
-      <Testimonials />
+      <OurApproach />
       <CTASection />
     </>
   );

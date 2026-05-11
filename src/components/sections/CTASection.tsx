@@ -1,6 +1,7 @@
 import { Container } from "@/components/ui/Container";
 import { Button } from "@/components/ui/Button";
 import { Badge } from "@/components/ui/Badge";
+import { MotionSection } from "@/components/motion/MotionSection";
 
 type Props = {
   eyebrow?: string;
@@ -24,18 +25,18 @@ export function CTASection({
   return (
     <section className="relative py-20 sm:py-24">
       <Container>
-        <div className="relative overflow-hidden rounded-[var(--radius-2xl)] border border-white/[0.07] bg-gradient-to-br from-[var(--color-surface)] to-[var(--color-bg-raised)] p-10 sm:p-14">
+        <MotionSection className="relative overflow-hidden rounded-[var(--radius-2xl)] border border-white/[0.07] bg-gradient-to-br from-[var(--color-surface)] to-[var(--color-bg-raised)] p-10 sm:p-14">
           <div
             aria-hidden="true"
-            className="pointer-events-none absolute inset-0 bg-radial-fade"
+            className="pointer-events-none absolute inset-0 bg-radial-fade ambient-drift"
           />
           <div
             aria-hidden="true"
-            className="pointer-events-none absolute -right-24 -top-24 size-72 rounded-full bg-[var(--color-violet-soft)] blur-3xl"
+            className="pointer-events-none absolute -right-24 -top-24 size-72 rounded-full bg-[var(--color-violet-soft)] blur-3xl ambient-drift-reverse"
           />
           <div
             aria-hidden="true"
-            className="pointer-events-none absolute -left-24 -bottom-24 size-72 rounded-full bg-[var(--color-accent-soft)] blur-3xl"
+            className="pointer-events-none absolute -left-24 -bottom-24 size-72 rounded-full bg-[var(--color-accent-soft)] blur-3xl ambient-drift"
           />
 
           <div className="relative max-w-2xl">
@@ -55,7 +56,7 @@ export function CTASection({
               </Button>
             </div>
           </div>
-        </div>
+        </MotionSection>
       </Container>
     </section>
   );

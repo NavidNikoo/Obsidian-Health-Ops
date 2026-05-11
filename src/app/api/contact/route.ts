@@ -36,7 +36,7 @@ export async function POST(req: NextRequest) {
     return NextResponse.json(
       {
         error:
-          "We could not deliver your message right now. Please email hello@meridianbilling.co directly.",
+          "We could not deliver your message right now. Please email meridianbillingco@gmail.com directly.",
       },
       { status: 502 }
     );

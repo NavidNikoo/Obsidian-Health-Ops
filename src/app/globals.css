@@ -202,4 +202,62 @@
       transform: translateY(0);
     }
   }
+
+  /* Ultra-slow ambient gradient drift. Very low amplitude.
+     Pairs with .bg-radial-fade / .bg-violet-fade backgrounds. */
+  .ambient-drift {
+    animation: ambient-drift 32s ease-in-out infinite alternate;
+    will-change: transform, opacity;
+  }
+
+  .ambient-drift-reverse {
+    animation: ambient-drift-reverse 38s ease-in-out infinite alternate;
+    will-change: transform, opacity;
+  }
+
+  @keyframes ambient-drift {
+    0% {
+      transform: translate3d(0, 0, 0) scale(1);
+      opacity: 0.92;
+    }
+    100% {
+      transform: translate3d(1.2%, -0.8%, 0) scale(1.04);
+      opacity: 1;
+    }
+  }
+
+  @keyframes ambient-drift-reverse {
+    0% {
+      transform: translate3d(0, 0, 0) scale(1);
+      opacity: 0.9;
+    }
+    100% {
+      transform: translate3d(-1.2%, 0.6%, 0) scale(1.05);
+      opacity: 1;
+    }
+  }
+}
+
+/* Honor user motion preferences across the whole site. */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+    scroll-behavior: auto !important;
+  }
+
+  .ambient-drift,
+  .ambient-drift-reverse {
+    animation: none !important;
+    transform: none !important;
+  }
+
+  .anim-rise {
+    animation: none !important;
+    opacity: 1;
+    transform: none;
+  }
 }
